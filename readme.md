@@ -24,37 +24,18 @@ You can also simply type out 'fx' directly before 'twitter.com' in any valid twi
 
 [TwitFix-Extension](https://github.com/robinuniverse/TwitFix-Extension) - A browser extention that lets you right click twitter videos to copy a twitfix link to your clipboard
 
-# Monthly Contributors
+# Support the Original Creator!
 
-TwitFix is run for free, period, I have no plans to monetize it directly in any way ( no ads, no premium accounts with more features ) so I rely on donations to keep TwitFix running, and I have created the option to [donate on a monthly basis using my KoFi](https://ko-fi.com/robin_universe#tier16328580186740)
-
-
-
-Here's a a list of the people who help to keep this project alive! ( current total monthly - $49!!! )
-
-1. [$3] First Contributor and Twitter Funnyman **Chris Burwell** ( [@countchrisdo](https://twitter.com/countchrisdo) on Twitter )
-
-2. [$9] Previously highest Contributor, Suspciously wealthy furry, and a very loving friend **Vectrobe** ( [@Vectrobe](https://twitter.com/Vectrobe) on Twitter )
-
-3. [$10] New highest monthly contributor, **helloitscrash**!
-
-4. [$6] A Mysterious and **Anonymous** contributor...
-
-5. [$10] One of the highest contributors, **Ryan Vilbrandt**!
-
-6. [$3] **Starcat13**, the one with the coolest sounding name
-
-7. [$5] THE LIGHT THROUGH WHICH GOD SPEAKS TO THIS EARTH: **Statek**
-
-8. [$3] **Impulse**, probably the source cheat
-
-9. [$3] a STRONG contendor for coolest name, "**Lost in Art & Magic**"       
+>TwitFix is run for free, period, I have no plans to monetize it directly in any way ( no ads, no premium accounts with more features ) so I rely on donations to keep TwitFix running, and I have created the option to [donate on a monthly basis using my KoFi](https://ko-fi.com/robin_universe#tier16328580186740)
+     
 
 ## How to run (server side)
 
-this script uses the youtube-dl python module, along with flask, twitter and pymongo, so install those with pip (you can use `pip install -r requirements.txt`) and start the server with `python twitfix.py`
+Run `docker-compose up -d`. This should build a new docker image with flask and all the dependcies in `app/requirements.txt` and then set up a container with using that image that runs the server. 
 
-I have included some files to give you a head start on setting this server up with uWSGI, though if you decide to use uWSGI I suggest you set up mongoDB link caching 
+This project is designed to slot into an external traefik instance so you should configure that using the [Quick Start Guide](https://doc.traefik.io/traefik/getting-started/quick-start/) and the [Traefik TSL Docs](https://doc.traefik.io/traefik/https/acme/) (**tip**: you want the CLI config options and you should pass them into the traefik container using the `command` section)
+
+A future version of this repo will probably have additional `docker-compose` files to set up mongoDB link caching and create a traefik proxy for you.
 
 ### Config
 
