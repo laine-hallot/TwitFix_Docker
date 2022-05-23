@@ -645,5 +645,7 @@ def oEmbedGen(description, user, video_link, ttype):
     return out
 
 if __name__ == "__main__":
-    app.config['SERVER_NAME']='localhost:80'
+    import os
+    FRONTEND_URL = os.getenv('FRONTEND_URL')
+    app.config['SERVER_NAME']=FRONTEND_URL+':8888'
     app.run(host='0.0.0.0')

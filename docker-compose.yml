@@ -1,0 +1,37 @@
+version: '3'
+services:
+  web:
+    build: ./
+    restart: 'always'
+    volumes:
+      - ./app:/app
+    expose:
+      - "8888"
+    environment:
+      - FLASK_APP=wsgi.py
+      - FLASK_DEBUG=0
+      - FLASK_ENV=development
+      - LISTEN_PORT=8888
+      - FRONTEND_URL=${FRONTEND_URL:?err}
+      - "RUN=python3 wsgi.py"
+    command: python3 wsgi.py
+    # Infinite loop, to keep it alive, for debugging
+   # command: bash -c "while true; do echo 'sleeping...' && sleep 10; done"
+
+    labels:
+        traefik.enable: true
+        traefik.http.routers.kiiroi_fix.rule: Host(`${FRONTEND_URL:?err}`)
+        traefik.http.routers.kiiroi_fix.entrypoints: websecure
+        traefik.docker.network: kiiroi_net
+        traefik.http.routers.kiiroi_fix.tls.certresolver: myresolver
+        traefik.http.services.kiiroi_fix.loadbalancer.server.port: 8888
+        traefik.docker.network: kiiroi_net
+        traefik.port: 8888
+    networks: 
+      - kiiroi_net
+
+
+networks:
+  kiiroi_net:
+    driver: bridge
+    name: kiiroi_net
